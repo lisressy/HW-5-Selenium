@@ -1,7 +1,10 @@
-from selene import browser, by, have
+import os
 
+from selene import browser, by, have
+import time
 
 def test_form_filling():
+    file_path = os.path.join(os.path.dirname(__file__), 'avatar.png')
 
     browser.open('https://demoqa.com/automation-practice-form')
 
@@ -29,6 +32,10 @@ def test_form_filling():
     browser.element('#city').click()
     browser.element('//div[text()="Delhi"]').click()
 
+    browser.element('#uploadPicture').set_value(file_path)
+
+    #https: // github.com / lisressy / HW - 5 - Selenium / blob / main / avatar.png
+
     browser.element('#submit').click()
 
     browser.element('.modal-content').should(have.text('John'))
@@ -36,3 +43,12 @@ def test_form_filling():
     browser.element('.modal-content').should(have.text('lisressy@test.com'))
     browser.element('.modal-content').should(have.text('1122334455'))
     browser.element('.modal-content').should(have.text('Ghandi str., 11'))
+    browser.element('.modal-content').should(have.text('Maths'))
+    browser.element('.modal-content').should(have.text('Reading'))
+    browser.element('.modal-content').should(have.text('NCR Delhi'))
+    browser.element('.modal-content').should(have.text('Male'))
+    browser.element('.modal-content').should(have.text('avatar.png'))
+
+    time.sleep(10)
+
+
